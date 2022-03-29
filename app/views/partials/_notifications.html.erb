@@ -1,0 +1,14 @@
+<% unless flash.empty? %>
+  <script>
+    <% flash.each do |key, value| %>
+      <% type = key.to_s.gsub('alert', 'error').gsub('notice', 'success') %>
+      new Noty({
+        type: '<%= type %>',
+        text: '<%= value %>',
+        layout: 'topRight',
+        theme: 'metroui',
+        timeout: '3000'
+      }).show();
+    <% end %>
+  </script>
+<% end %>
