@@ -7,6 +7,7 @@
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "4.3.0",
     "jquery": "^3.6.0",
+    "noty": "^3.2.0-beta-deprecated",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0"
