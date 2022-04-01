@@ -58,6 +58,50 @@
   </div>
 </nav>
 
+<nav class="navbar has-shadow m-b-10">
+  <div class="container">
+    <div class="navbar">
+      <%= link_to 'Dashboard', dashboard_path, class: "navbar-item" %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Selling</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Create new design</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Buying</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Post request</a>
+          <a class="navbar-item">Manage requests</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Buyer requests</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Active requests</a>
+          <a class="navbar-item">Offers sent</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Orders</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Selling orders</a>
+          <a class="navbar-item">Buying orders</a>
+        </div>
+      </div>
+      <%= link_to 'Earnings', dashboard_path, class: "navbar-item" %>
+      <%= link_to 'Messages', dashboard_path, class: "navbar-item" %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Settings</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Payment methods</a>
+          <a class="navbar-item">Payout methods</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <script>
   $(document).ready(function() {
 
