@@ -12,11 +12,11 @@ class UsersController < ApplicationController
     else
       flash[:alert] = "Cannot update"
     end
-    redirect_to_dashboard_path
+    redirect_to dashboard_path
   end
 
   private
   def current_user_params
-    params.require(:user).permit(:from, :about, :status, :language)
+    params.require(:user).permit(:from, :about, :status, :language, :avatar)
   end
 end
