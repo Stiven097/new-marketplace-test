@@ -5,7 +5,7 @@ class DesignsController < ApplicationController
 
   def new
     @design = current_user.designs.build
-    @category = Category.all
+    @categories = Category.all
   end
 
   def create
@@ -13,7 +13,7 @@ class DesignsController < ApplicationController
 
     if @design.save
       @design.pricings.create(Pricing.pricing_types.values.map{ |x| {pricing_type: x} })
-      redirect_to edit_design_path, notice: "Saved"
+      redirect_to edit_design_path(@design), notice: "Saved"
     else
       redirect_to request.referrer, flash: {error: @design.errors.full_messages}
     end
@@ -39,7 +39,7 @@ class DesignsController < ApplicationController
   end
 
   def design_params
-    params.require(:desing).permit(:title, :video, :active, :category_id, :has_single_pricing,
+    params.require(:design).permit(:title, :video, :active, :category_id, :has_single_pricing,
                                     pricings_attributes: [:id, :title, :description, :delivery_time, :price, :pricing_type])
   end
 end
