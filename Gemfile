@@ -29,6 +29,8 @@ gem 'devise', '=4.6.1'
 gem 'omniauth', '1.9.0'
 gem 'omniauth-facebook', '5.0.0'
 
+gem 'faker', '=1.9.3'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
