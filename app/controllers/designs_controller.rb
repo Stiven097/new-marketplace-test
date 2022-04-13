@@ -1,7 +1,9 @@
 class DesignsController < ApplicationController
+
+  protect_from_forgery except: [:upload_photo]
   before_action :authenticate_user!, except: [:show]
   before_action :set_design, except: [:new, :create]
-  before_action :is_authorised, only: [:edit, :update]
+  before_action :is_authorised, only: [:edit, :update, :upload_photo, :delete_photo]
   before_action :set_step, only: [:update, :edit]
 
   def new
@@ -79,6 +81,17 @@ class DesignsController < ApplicationController
   end
 
   def show
+  end
+
+  def upload_photo
+    @design.photos.attach(params[:file])
+    render json: {success: true}
+  end
+
+  def delete_photo
+    @image = ActiveStorage::Attachment.find(params[:photo_id])
+    @image.purge
+    redirect_to edit_design_path(@design, step: 4)
   end
 
   private
