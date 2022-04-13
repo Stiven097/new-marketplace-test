@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 window.Noty = require("noty")
+window.Dropzone = require("dropzone")
 
 $(document).ready(() => {
   $('.toggle').on('click', (e) => {
