@@ -34,9 +34,8 @@
         </div>
       </div>
 
-      <!-- FORM TO CREATE A NEW GIG HERE-->
+      <!-- FORM TO CREATE A NEW DESIGN HERE-->
       <%= form_for @design, html: {class: "steps-content m-l-100 m-r-100"} do |f| %>
-
         <%= hidden_field_tag 'step', @step %>
 
         <%= render 'step1', f: f %>
