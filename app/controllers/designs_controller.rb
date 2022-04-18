@@ -5,10 +5,10 @@ class DesignsController < ApplicationController
   before_action :set_design, except: [:new, :create]
   before_action :is_authorised, only: [:edit, :update, :upload_photo, :delete_photo]
   before_action :set_step, only: [:update, :edit]
+  before_action :set_categories, only: [:new, :edit, :show]
 
   def new
     @design = current_user.designs.build
-    @categories = Category.all
   end
 
   def create
@@ -23,7 +23,6 @@ class DesignsController < ApplicationController
   end
 
   def edit
-    @categories = Category.all
   end
 
   def update
@@ -81,6 +80,11 @@ class DesignsController < ApplicationController
   end
 
   def show
+    
+  end
+
+  def set_categories
+    @categories = Category.all
   end
 
   def upload_photo
