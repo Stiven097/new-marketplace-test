@@ -28,7 +28,7 @@
     </div>
 
     <div class="navbar-end">
-      <a class="navbar-item">Post Designs</a>
+      <%= link_to "Post Design", new_design_path, class: "navbar-item" %>
       <a class="navbar-item">Browse Designs</a>
 
       <% if (!user_signed_in?) %>
@@ -70,7 +70,7 @@
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">Selling</a>
         <div class="navbar-dropdown">
-          <a class="navbar-item">Create new design</a>
+          <%= link_to "Create New Design", new_design_path, class: "navbar-item" %>
         </div>
       </div>
       <div class="navbar-item has-dropdown is-hoverable">
