@@ -13,6 +13,14 @@ class OrdersController < ApplicationController
     redirect_to request.referrer
   end
 
+  def selling_orders
+    @orders = current_user.selling_orders
+  end
+
+  def buying_orders
+    @orders = current_user.buying_orders
+  end
+
   private
   def charge(design, pricing)
     order = design.orders.new
