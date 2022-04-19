@@ -21,6 +21,20 @@ class OrdersController < ApplicationController
     @orders = current_user.buying_orders
   end
 
+  def complete
+    @order = Order.find(params[:id])
+
+    if !@order.completed?
+      if @order.completed!
+        flash[:notice] = "Your order has been completed"
+      else
+        flash[:alert] = "Something went wrong. Could not complete the order"
+      end
+
+      redirect_to request.referrer
+    end
+  end
+
   private
   def charge(design, pricing)
     order = design.orders.new
