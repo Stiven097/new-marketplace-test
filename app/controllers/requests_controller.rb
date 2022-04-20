@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
   before_action :set_categories, only: [:new, :edit, :list]
 
   def index
+    @requests = current_user.requests
   end
 
   def new
@@ -35,6 +36,8 @@ class RequestsController < ApplicationController
   end
 
   def destroy
+    @request.destroy
+    redirect_to request_path, notice: "Request successfully deleted"
   end
 
   def list
