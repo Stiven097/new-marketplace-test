@@ -24,6 +24,11 @@ class RequestsController < ApplicationController
   end
 
   def update
+    if @request.update(request_params)
+      redirect_to requests_path, notice: "Your request has been submitted"
+    else
+      redirect_to request.referrer, flash: {error: @request.errors.full_messages.join(', ')}
+    end
   end
 
   def show
