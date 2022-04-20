@@ -6,5 +6,5 @@ class Request < ApplicationRecord
 
   validates :title, presence: { message: "Cannot be empty" }
   validates :description, presence: { message: "Cannot be empty" }
-  validates :delivery, numerality: {only_integer: true, message: "Must be a number" }
+  validates :delivery, numericality: {only_integer: true, message: "Must be a number" }
 end
