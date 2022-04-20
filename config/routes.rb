@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/selling_orders', to: 'orders#selling_orders'
   get '/buying_orders', to: 'orders#buying_orders'
   put '/orders/:id/complete', to: 'orders#complete', as: 'complete_order'
+  get '/all-requests', to: 'requests#list'
 
   post '/users/edit', to: 'users#update'
 
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:create]
   end
+
+  resources :requests
 
   devise_for :users,
               path: '',
