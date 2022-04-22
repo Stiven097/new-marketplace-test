@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/all_requests', to: 'requests#list'
 
   post '/users/edit', to: 'users#update'
+  post '/offers', to: 'offers#create'
 
   resources :designs do
     member do
