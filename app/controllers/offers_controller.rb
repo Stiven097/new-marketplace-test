@@ -17,7 +17,8 @@ class OffersController < ApplicationController
 
     @offer = current_user.offers.build(offer_params)
     if @offer.save
-      redirect_to request.referrer, notice: "Your offer has been successfuly submitted"
+      #redirect_to request.referrer, notice: "Your offer has been successfuly submitted"
+      redirect_to my_offers_path, notice: "Your offer has been successfuly submitted"
     else
       redirect_to request.referrer, flash: {error: @offer.errors.full_messages.join(', ')}
     end
