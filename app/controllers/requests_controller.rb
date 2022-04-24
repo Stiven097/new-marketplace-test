@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_request, except: [:new, :create, :index, :list, :offers, :my_offers]
+  before_action :set_request, except: [:new, :create, :index, :list, :my_offers]
   before_action :is_authorised, only: [:edit, :update, :destroy, :offers]
   before_action :set_categories, only: [:new, :edit, :list]
 
@@ -59,7 +59,6 @@ class RequestsController < ApplicationController
   end
 
   private
-
   def set_categories
     @categories = Category.all
   end
@@ -75,4 +74,5 @@ class RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:description, :category_id, :delivery, :budget, :attachment_file, :title)
   end
+
 end
