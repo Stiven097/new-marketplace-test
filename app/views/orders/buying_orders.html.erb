@@ -24,7 +24,10 @@
           <tr>
             <td><%= o.created_at.strftime('%d %b %Y') %></td>
             <td><%= o.seller_name%></td>
-            <td><%= link_to o.title, design_path(o.design) %></td>
+            <td>
+              <%= link_to o.title, design_path(o.design) if !o.design.nil? %>
+              <%= link_to o.title, request_path(o.request) if !o.request.nil? %>
+            </td>
             <td><%= o.due_date.strftime('%d %b %Y') %></td>
             <td><%= o.amount %></td>
             <td>
