@@ -17,7 +17,6 @@ class OffersController < ApplicationController
 
     @offer = current_user.offers.build(offer_params)
     if @offer.save
-      #redirect_to request.referrer, notice: "Your offer has been successfuly submitted"
       redirect_to my_offers_path, notice: "Your offer has been successfuly submitted"
     else
       redirect_to request.referrer, flash: {error: @offer.errors.full_messages.join(', ')}
@@ -25,14 +24,40 @@ class OffersController < ApplicationController
   end
 
   def accept
+    if @offer.pending?
+      @offer.accepted!
 
+      if charge(@offer.request, @offer)
+        flash[:notice] = "The offer has been accepted"
+        return redirect_to buying_orders_path
+      else
+        flash[:alert] = "Cannot process your offer"
+      end
+    end
+    redirect_to request.referrer
   end
 
   def reject
-
+    if @offer.pending?
+      @offer.rejected!
+      flash[:notice] = "The offer has been rejected"
+    end
+    redirect_to request.referrer
   end
 
   private
+
+  def charge(req, offer)
+    order = req.orders.new
+    order.due_date = Date.today() + offer.days
+    order.title = req.title
+    order.seller_name = offer.user.full_name
+    order.seller_id = offer.user.id
+    order.buyer_name = current_user.full_name
+    order.buyer_id = current_user.id
+    order.amount = offer.amount
+    order.save
+  end
 
   def set_offer
     @offer = Offer.find(params[:id])
