@@ -192,7 +192,8 @@
                     <div class="card-content p-t-5 p-b-5">
                       <p class="subtitle is-6 m-b-5"><%= link_to design.title, design_path(design) %></p>
                       <span class="star-review"><i class="fas fa-star"></i>
-                        4.8 <span class="has-text-primary">(23)</span>
+                        <%= design.average_rating %>
+                        <span class="has-text-primary">(<%= design.reviews.count %>)</span>
                       </span>
                     </div>
 
