@@ -13,18 +13,21 @@
         </div>
 
         <!-- Sort by Dropdown -->
-        <div class="field p-10">
-          <div class="select">
-            <%= select_tag 'Sort', options_for_select(
-            [
-              ['Price Low to High', ''],
-              ['Price High to Low', ''],
-              ['Latest First', ''],
-              ['Oldest First', '']
-            ]
-            ) %>
+        <%= form_tag '', method: :get do %>
+          <%= hidden_field_tag 'category', @category ? @category.id : '' %>
+          <div class="field p-10">
+            <div class="select">
+              <%= select_tag 'sort', options_for_select(
+              [
+                ['Price Low to High', 'price asc'],
+                ['Price High to Low', 'price desc'],
+                ['Latest First', 'designs.created_at desc'],
+                ['Oldest First', 'designs.created_at asc']
+              ], selected: @sort
+              ), onchange: "this.form.submit();" %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
 
@@ -40,6 +43,7 @@
 
                 <%= form_tag '', method: :get do %>
                   <%= hidden_field_tag 'category', @category ? @category.id : '' %>
+                  <%= hidden_field_tag 'sort', @sort %>
 
                   <!-- Title Search -->
                   <div class="field">
