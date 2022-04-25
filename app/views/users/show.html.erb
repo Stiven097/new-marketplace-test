@@ -91,34 +91,77 @@
 
             <!-- RIGHT SIDE -->
             <div class="column">
+
+              <div class="columns is-multiline">
+                <% @user.designs.each do |design| %>
+                  <div class="column is-one-third">
+                    <div class="card">
+
+                      <div class="card-image">
+                        <%= link_to edit_design_path(design) do %>
+                          <figure class="image is-4by3">
+                            <%= image_tag design_cover(design) %>
+                          </figure>
+                        <% end %>
+                      </div>
+
+                      <div class="card-content p-t-5 p-b-5">
+                        <p class="subtitle is-6 m-b-5"><%= link_to design.title, design_path(design) %></p>
+                        <span class="star-review"><i class="fas fa-star"></i>
+                          <%= design.average_rating %>
+                          <span class="has-text-primary">(<%= design.reviews.count %>)</span>
+                        </span>
+                      </div>
+
+                      <footer class="card-footer">
+                        <% basic_price = design.pricings.find{ |p| p.pricing_type == 'basic' } %>
+                        <a class="has-text-danger is-block card-footer-item has-text-right">
+                          <% if !basic_price.nil? %>
+                            <span class="small-title">STARTING AT</span>
+                            <strong>$<%= basic_price.price %></strong>
+                          <% else %>
+                            <strong>
+                              <span class="small-title has-text-dark">NO PRICING YET</span>
+                            </strong>
+                          <% end %>
+                        </a>
+                      </footer>
+
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
               <div class="card">
                 <div class="card-header">
                   <div class="card-header-title">Latest Reviews</div>
                 </div>
                 <div class="card-content">
                   <!-- Sample -->
-                  <article class="media">
-                    <figure class="media-left">
-                      <p class="image is-64x64">
-                        <%= image_tag avatar_url(@user) %>
-                      </p>
-                    </figure>
-
-                    <div class="media-content">
-                      <div class="content">
-                        <p>
-                          <strong>John Doe</strong><br>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  <% @reviews.each do |r| %>
+                    <article class="media">
+                      <figure class="media-left">
+                        <p class="image is-64x64">
+                          <%= image_tag avatar_url(r.buyer), class: "is-rounded" %>
                         </p>
-                        <small>31m</small>
+                      </figure>
+
+                      <div class="media-content">
+                        <div class="content">
+                          <p>
+                            <strong><%= r.buyer.full_name %></strong><br>
+                            <%= r.review %>
+                          </p>
+                          <small><%= time_ago_in_words(r.created_at) %></small>
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="media-right">
-                      <span class="star-review"><i class="fas fa-star"></i> 5.0</span>
-                    </div>
+                      <div class="media-right">
+                        <span class="star-review"><i class="fas fa-star"></i> <%= r.stars %></span>
+                      </div>
 
-                  </article>
+                    </article>
+                  <% end %>
                 </div>
               </div>
             </div>
