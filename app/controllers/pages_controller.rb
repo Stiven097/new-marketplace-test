@@ -16,6 +16,7 @@ class PagesController < ApplicationController
 
     query_condition = []
     query_condition[0] = "designs.active = true"
+    query_condition[0] += " AND ((designs.has_single_pricing = true AND pricings.pricing_type = 0) OR (designs.has_single_pricing = false))"
 
     if !@q.blank?
       query_condition[0] += " AND designs.title ILIKE ?"
@@ -43,9 +44,10 @@ class PagesController < ApplicationController
     end
 
     @designs = Design
-                      .select("designs.id, designs.title, designs.user_id, pricings.price AS price")
+                      .select("designs.id, designs.title, designs.user_id, MIN(pricings.price) AS price")
                       .joins(:pricings)
                       .where(query_condition)
+                      .group("designs.id")
                       .order(@sort)
                       .page(params[:page])
                       .per(6)
