@@ -19,12 +19,16 @@
       </div>
 
       <footer class="card-footer">
-        <% basic_price = design.pricings.find{ |p| p.pricing_type == 'basic' } %>
+        <a class="card-footer-item">
+          <label class="tooltip" data-tooltip= "<%= design.user.full_name %>">
+            <figure class="image is-48x48">
+              <%= image_tag avatar_url(design.user), class: "is-rounded" %>
+            </figure>
+          </label>
+        </a>
         <a class="has-text-danger is-block card-footer-item has-text-right">
-          <% if !basic_price.nil? %>
-            <span class="small-title">STARTING AT</span>
-            <strong>$<%= basic_price.price %></strong>
-          <% end %>
+          <span class="small-title">STARTING AT</span>
+          <strong>$<%= design.price %></strong>
         </a>
       </footer>
 
