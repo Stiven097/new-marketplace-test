@@ -39,9 +39,11 @@
               <tr>
                 <td><%= r.created_at.strftime('%d, %b %Y') %></td>
                 <td>
-                  <figure class="image is-48x48">
-                    <%= image_tag avatar_url(r.user), class: "is-rounded" %>
-                  </figure>
+                  <label class="tooltip" data-tooltip="<%= r.user.full_name %>">
+                    <figure class="image is-48x48">
+                      <%= image_tag avatar_url(r.user), class: "is-rounded" %>
+                    </figure>
+                  </label>
                 </td>
                 <td>
                   <%= link_to request_path(r), class: "tooltip" do %>
