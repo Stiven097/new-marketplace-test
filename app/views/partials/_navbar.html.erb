@@ -12,24 +12,24 @@
   </div>
 
   <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <div class="navbar-item">
-        <div class="field has-addons">
-          <div class="control">
-            <input class="input" type="text" placeholder="Find a design">
-          </div>
-          <div class="control">
-            <a class="button is-danger">
-              Search
-            </a>
-          </div>
+    <% if (user_signed_in?) && !current_page?(root_path) && !current_page?(search_path) %>
+      <div class="navbar-start">
+        <div class="navbar-item">
+          <%= form_tag search_path, method: :get, class: "field has-addons" do %>
+            <div class="control">
+              <%= text_field_tag 'q', '', class: "input", placeholder: "Find a Design" %>
+            </div>
+            <div class="control">
+              <button class="button is-danger" type="submit">Search</button>
+            </div>
+          <% end %>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="navbar-end">
-      <%= link_to "Post Design", new_design_path, class: "navbar-item" %>
-      <a class="navbar-item">Browse Designs</a>
+      <%= link_to "Post a Design", new_design_path, class: "navbar-item" %>
+      <%= link_to "Browse Designs", search_path, class: "navbar-item" %>
 
       <% if (!user_signed_in?) %>
 
