@@ -3,7 +3,7 @@
     <div class="card">
 
       <div class="card-image">
-        <%= link_to edit_design_path(design) do %>
+        <%= link_to design_path(design) do %>
           <figure class="image is-4by3">
             <%= image_tag design_cover(design) %>
           </figure>
@@ -11,7 +11,7 @@
       </div>
 
       <div class="card-content p-t-5 p-b-5">
-        <p class="subtitle is-6 m-b-5"><%= link_to design.title, design_path(design) %></p>
+        <p class="subtitle is-6 m-b-5"><%= link_to design.title.truncate(20), design_path(design) %></p>
         <span class="star-review"><i class="fas fa-star"></i>
           <%= design.average_rating %>
           <span class="has-text-primary">(<%= design.reviews.count %>)</span>
@@ -19,13 +19,15 @@
       </div>
 
       <footer class="card-footer">
-        <a class="card-footer-item">
+        <span class="card-footer-item">
           <label class="tooltip" data-tooltip= "<%= design.user.full_name %>">
-            <figure class="image is-48x48">
-              <%= image_tag avatar_url(design.user), class: "is-rounded" %>
-            </figure>
+            <%= link_to users_path(design.user) do %>
+              <figure class="image is-48x48">
+                <%= image_tag avatar_url(design.user), class: "is-rounded" %>
+              </figure>
+            <% end %>
           </label>
-        </a>
+        </span>
         <a class="has-text-danger is-block card-footer-item has-text-right">
           <span class="small-title">STARTING AT</span>
           <strong>$<%= design.price %></strong>

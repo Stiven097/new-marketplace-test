@@ -112,14 +112,16 @@
           <div class="column">
             <div class="card">
               <div class="card-content is-horizontal-center is-flex">
-                <figure class="image is-96x96">
-                  <%= image_tag avatar_url(@design.user), class: "is-rounded" %>
-                </figure>
+                <%= link_to users_path(@design.user) do %>
+                  <figure class="image is-96x96">
+                    <%= image_tag avatar_url(@design.user), class: "is-rounded" %>
+                  </figure>
+                <% end %>
               </div>
               <div class="card-content f-15">
                 <div class="content has-text-centered">
                   <p class="title is-5"><%= @design.user.full_name %></p>
-                  <button class="button is-black is-outlined is-fullwidth">Contact me</button>
+                  <button class="button is-black is-outlined is-fullwidth">Contact Me</button>
                 </div>
                 <article class="media">
                   <div class="media-content">

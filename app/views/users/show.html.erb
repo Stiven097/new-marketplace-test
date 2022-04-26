@@ -13,7 +13,7 @@
                             <!-- Avatar -->
                             <div class="card-content is-horizontal-center is-flex">
                               <figure class="image is-128x128">
-                                <%= image_tag avatar_url(@user) %>
+                                <%= image_tag avatar_url(@user), class: "is-rounded" %>
                               </figure>
                             </div>
 
@@ -106,7 +106,7 @@
                       </div>
 
                       <div class="card-content p-t-5 p-b-5">
-                        <p class="subtitle is-6 m-b-5"><%= link_to design.title, design_path(design) %></p>
+                        <p class="subtitle is-6 m-b-5"><%= link_to design.title.truncate(20), design_path(design) %></p>
                         <span class="star-review"><i class="fas fa-star"></i>
                           <%= design.average_rating %>
                           <span class="has-text-primary">(<%= design.reviews.count %>)</span>
