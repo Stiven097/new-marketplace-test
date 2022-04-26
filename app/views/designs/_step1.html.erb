@@ -1,11 +1,13 @@
 <div class="step-content <%= 'is-active' if @step == 1 %>">
   <div class="field">
     <label class="label">Design Title</label>
-    <%= f.text_area :title, autocomplete: "title", class: "textarea" %>
+    <%= f.text_field :title, autocomplete: "title", class: "input" %>
   </div>
   <div class="field">
     <label class="label">Category</label>
-    <%= f.select(:category_id, options_for_select(@categories.map{ |c| [c.name, c.id] }, selected: @design.category_id)) %>
+    <div class="select">
+      <%= f.select(:category_id, options_for_select(@categories.map{ |c| [c.name, c.id] }, selected: @design.category_id)) %>
+    </div>
   </div>
   <div class="field">
     <label class="checkbox">
