@@ -46,6 +46,15 @@ class UsersController < ApplicationController
     redirect_to request.referrer
   end
 
+  def update_payout
+    if current_user.update(paypal: params[:paypal])
+      flash[:notice] = "Payout information updated successfully"
+    else
+      flash[:alert] = "Something went wrong"
+    end
+    redirect_to request.referrer
+  end
+
   private
   def current_user_params
     params.require(:user).permit(:from, :about, :status, :language, :avatar)
