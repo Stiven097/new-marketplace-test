@@ -11,11 +11,13 @@ Rails.application.routes.draw do
   get '/my_offers', to: 'requests#my_offers'
   get '/search', to: 'pages#search'
   get '/settings/payment', to: 'users#payment', as: 'settings_payment'
+  get '/settings/payout', to: 'users#payout', as: 'settings_payout'
 
   post '/users/edit', to: 'users#update'
   post '/offers', to: 'offers#create'
   post '/reviews', to: 'reviews#create'
   post '/settings/payment', to: 'users#update_payment', as: 'update_payment'
+  post '/settings/payout', to: 'users#update_payout', as: 'update_payout'
 
   put '/orders/:id/complete', to: 'orders#complete', as: 'complete_order'
   put '/offers/:id/accept', to: 'offers#accept', as: 'accept_offer'
