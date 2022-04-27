@@ -33,9 +33,16 @@
     <div class="columns is-centered">
       <div class="column is-8-tablet is-6-desktop is-6-widescreen">
         <p class="title has-text-centered">Payment Method</p>
+        <% if current_user.stripe_last_4 %>
+          <div class="card">
+            <div class="card-header-title is-centered">
+              <%= "Your current card is: **** **** **** #{current_user.stripe_last_4}" %>
+            </div>
+          </div>
+        <% end %>
 
         <!-- Display a payment form -->
-        <form action="/charge" method="post" id="payment-form">
+        <%= form_with url: update_payment_path, local: true, id: "payment-form" do |f| %>
           <div class="card form-row">
             <div id="card-element">
 
@@ -43,9 +50,9 @@
             <div id="card-errors" role="alert"></div>
           </div>
           <div class="field is-grouped is-grouped-centered">
-            <button class="button is-primary m-t-20">Add Card</button>
+            <%= f.submit "#{current_user.stripe_id ? "Update Card" : "Add Card"}", class: "button is-primary m-t-20" %>
           </div>
-        </form>
+        <% end %>
       </div>
     </div>
   </div>
