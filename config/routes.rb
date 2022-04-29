@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/search', to: 'pages#search'
   get '/settings/payment', to: 'users#payment', as: 'settings_payment'
   get '/settings/payout', to: 'users#payout', as: 'settings_payout'
+  get '/designs/:id/checkout/:pricing_type', to: 'designs#checkout', as: 'checkout'
 
   post '/users/edit', to: 'users#update'
   post '/offers', to: 'offers#create'
