@@ -98,6 +98,20 @@ class DesignsController < ApplicationController
     redirect_to edit_design_path(@design, step: 4)
   end
 
+  def checkout
+    if current_user.stripe_id
+      @stripe_customer = Stripe::Customer.retrieve({
+        id: current_user.stripe_id, 
+        expand: ['sources']
+      })
+
+      @design = Design.find(params[:id])
+      @pricing = @design.pricings.find_by(pricing_type: params[:pricing_type])
+    else
+      redirect_to settings_payment_path, alert: "You have to add a card first"
+    end
+  end
+
   private
 
   def set_step
