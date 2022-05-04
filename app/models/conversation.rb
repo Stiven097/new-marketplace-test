@@ -1,9 +1,9 @@
 class Conversation < ApplicationRecord
-  belongs_to :sender, className: "User"
-  belongs_to :receiver, className: "User"
+  belongs_to :sender, class_name: "User"
+  belongs_to :receiver, class_name: "User"
 
   def last_message
-    message = Message.where(conversatio_id: self.id).last
+    message = Message.where(conversation_id: self.id).last
     if message.present?
       return message
     else
