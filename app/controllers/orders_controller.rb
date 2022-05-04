@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_authorised, only: [:show]
 
   def create
     design = Design.find(params[:design_id])
@@ -37,7 +38,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def show
+    @order = Order.find(params[:id])
+    @design = @order.design_id ? Design.find(@order.design_id) : nil
+    @request = @order.request_id ? Request.find(@order.request_id) : nil
+    @comments = Comment.where(order_id: params[:id])
+  end
+  
+
   private
+
+  def is_authorised
+    redirect_to dashboard_path, 
+                alert: "You don't have permission" unless Order.where("id = ? AND (seller_id = ? OR buyer_id = ?)",
+                                                                        params[:id], current_user.id, current_user.id)
+  end
+  
 
   def charge(design, pricing)
     order = design.orders.new
