@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post '/settings/payment', to: 'users#update_payment', as: 'update_payment'
   post '/settings/payout', to: 'users#update_payout', as: 'update_payout'
   post '/users/withdraw', to: 'users#withdraw', as: 'withdraw'
+  post '/messages', to: 'messages#create'
 
   put '/orders/:id/complete', to: 'orders#complete', as: 'complete_order'
   put '/offers/:id/accept', to: 'offers#accept', as: 'accept_offer'
