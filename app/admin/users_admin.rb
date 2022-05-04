@@ -52,13 +52,12 @@ Trestle.resource(:users) do
     text_area :about
   end
 
-  # search do |query|
-  #   if query
-  #     User.where("email ILIKE ? OR full_name ILIKE ?", "%#{query}%", "%#{query}%")
-  #   else
-  #     User.all
-  #   end
-    
-  # end
+  search do |query|
+    if query
+      User.where("email ILIKE ? OR full_name ILIKE ?", "%#{query}%", "%#{query}%")
+    else
+      User.all
+    end
+  end
 
 end

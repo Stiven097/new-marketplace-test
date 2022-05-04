@@ -49,13 +49,12 @@ Trestle.resource(:designs) do
     select :category_id, Category.where(active: true)
   end
 
-  # search do |query|
-  #   if query
-  #     Design.where("title ILIKE", "%#{query}%", "%#{query}%")
-  #   else
-  #     Design.all
-  #   end
-    
-  # end
+  search do |query|
+    if query
+      Design.where("title ILIKE ?", "%#{query}%")
+    else
+      Design.all
+    end
+  end
 
 end
