@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   put '/offers/:id/accept', to: 'offers#accept', as: 'accept_offer'
   put '/offers/:id/reject', to: 'offers#reject', as: 'reject_offer'
 
+  mount ActionCable.server => '/cable'
+
   resources :designs do
     member do
       delete :delete_photo
