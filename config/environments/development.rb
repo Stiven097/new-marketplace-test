@@ -63,4 +63,14 @@ Rails.application.configure do
 
   # Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+      login: "sb-qq9h4315250576_api1.business.example.com",
+      password: "BM6LE6EQ4YCRQZAP",
+      signature: "AN2wM5YRdX0NKr3BNaLf3U4-6e2.Aaw5X9nLEpo0u21ankqqluGzteEu"
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+  end
 end
