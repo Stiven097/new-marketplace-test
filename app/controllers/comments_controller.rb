@@ -17,7 +17,8 @@ class CommentsController < ApplicationController
         @comment = Comment.new(
             user_id: current_user.id,
             order_id: order.id,
-            content: comment_params[:content]
+            content: comment_params[:content],
+            attachment_file: comment_params[:attachment_file]
         )
 
         if @comment.save
@@ -40,7 +41,7 @@ class CommentsController < ApplicationController
     
 
     def comment_params
-        params.require(:comment).permit(:content, :order_id)
+        params.require(:comment).permit(:content, :order_id, :attachment_file)
     end
 
     def is_valid_order
